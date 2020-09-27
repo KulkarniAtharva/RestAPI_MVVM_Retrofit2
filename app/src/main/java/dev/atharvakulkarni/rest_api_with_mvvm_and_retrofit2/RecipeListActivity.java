@@ -25,7 +25,6 @@ import dev.atharvakulkarni.rest_api_with_mvvm_and_retrofit2.util.Testing;
 import dev.atharvakulkarni.rest_api_with_mvvm_and_retrofit2.util.VerticalSpacingItemDecorator;
 import dev.atharvakulkarni.rest_api_with_mvvm_and_retorfit2.viewmodels.RecipeListViewModel;
 
-
 public class RecipeListActivity extends BaseActivity implements OnRecipeListener
 {
     private static final String TAG = "RecipeListActivity";

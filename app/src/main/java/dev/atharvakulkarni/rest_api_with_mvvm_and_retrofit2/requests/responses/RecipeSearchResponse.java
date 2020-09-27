@@ -8,8 +8,8 @@ import java.util.List;
 
 import dev.atharvakulkarni.rest_api_with_mvvm_and_retrofit2.models.Recipe;
 
-public class RecipeSearchResponse {
-
+public class RecipeSearchResponse
+{
     @SerializedName("count")
     @Expose()
     private int count;
@@ -18,19 +18,19 @@ public class RecipeSearchResponse {
     @Expose()
     private List<Recipe> recipes;
 
-    public int getCount() {
+    public int getCount()
+    {
         return count;
     }
 
-    public List<Recipe> getRecipes() {
+    public List<Recipe> getRecipes()
+    {
         return recipes;
     }
 
     @Override
-    public String toString() {
-        return "RecipeSearchResponse{" +
-                "count=" + count +
-                ", recipes=" + recipes +
-                '}';
+    public String toString()
+    {
+        return "RecipeSearchResponse{" + "count=" + count + ", recipes=" + recipes + '}';
     }
 }

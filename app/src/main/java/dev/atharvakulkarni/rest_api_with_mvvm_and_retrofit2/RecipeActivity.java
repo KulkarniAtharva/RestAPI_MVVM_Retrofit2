@@ -21,8 +21,8 @@ import dev.atharvakulkarni.rest_api_with_mvvm_and_retorfit2.viewmodels.RecipeVie
 
 import dev.atharvakulkarni.rest_api_with_mvvm_and_retrofit2.models.Recipe;
 
-public class RecipeActivity extends BaseActivity {
-
+public class RecipeActivity extends BaseActivity
+{
     private static final String TAG = "RecipeActivity";
 
     // UI components
@@ -33,9 +33,9 @@ public class RecipeActivity extends BaseActivity {
 
     private RecipeViewModel mRecipeViewModel;
 
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
         mRecipeImage = findViewById(R.id.recipe_image);
@@ -51,20 +51,27 @@ public class RecipeActivity extends BaseActivity {
         getIncomingIntent();
     }
 
-    private void getIncomingIntent(){
-        if(getIntent().hasExtra("recipe")){
+    private void getIncomingIntent()
+    {
+        if(getIntent().hasExtra("recipe"))
+        {
             Recipe recipe = getIntent().getParcelableExtra("recipe");
             Log.d(TAG, "getIncomingIntent: " + recipe.getTitle());
             mRecipeViewModel.searchRecipeById(recipe.getRecipe_id());
         }
     }
 
-    private void subscribeObservers(){
-        mRecipeViewModel.getRecipe().observe(this, new Observer<Recipe>() {
+    private void subscribeObservers()
+    {
+        mRecipeViewModel.getRecipe().observe(this, new Observer<Recipe>()
+        {
             @Override
-            public void onChanged(@Nullable Recipe recipe) {
-                if(recipe != null){
-                    if(recipe.getRecipe_id().equals(mRecipeViewModel.getRecipeId())){
+            public void onChanged(@Nullable Recipe recipe)
+            {
+                if(recipe != null)
+                {
+                    if(recipe.getRecipe_id().equals(mRecipeViewModel.getRecipeId()))
+                    {
                         setRecipeProperties(recipe);
                         mRecipeViewModel.setRetrievedRecipe(true);
                     }
@@ -72,10 +79,13 @@ public class RecipeActivity extends BaseActivity {
             }
         });
 
-        mRecipeViewModel.isRecipeRequestTimedOut().observe(this, new Observer<Boolean>() {
+        mRecipeViewModel.isRecipeRequestTimedOut().observe(this, new Observer<Boolean>()
+        {
             @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean && !mRecipeViewModel.didRetrieveRecipe()){
+            public void onChanged(@Nullable Boolean aBoolean)
+            {
+                if(aBoolean && !mRecipeViewModel.didRetrieveRecipe())
+                {
                     Log.d(TAG, "onChanged: timed out..");
                     displayErrorScreen("Error retrieving data. Check network connection.");
                 }
@@ -83,24 +93,21 @@ public class RecipeActivity extends BaseActivity {
         });
     }
 
-    private void displayErrorScreen(String errorMessage){
-        mRecipeTitle.setText("Error retrieveing recipe...");
+    private void displayErrorScreen(String errorMessage)
+    {
+        mRecipeTitle.setText("Error retrieving recipe...");
         mRecipeRank.setText("");
         TextView textView = new TextView(this);
-        if(!errorMessage.equals("")){
+        if(!errorMessage.equals(""))
             textView.setText(errorMessage);
-        }
-        else{
+        else
             textView.setText("Error");
-        }
+
         textView.setTextSize(15);
-        textView.setLayoutParams(new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
+        textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         mRecipeIngredientsContainer.addView(textView);
 
-        RequestOptions requestOptions = new RequestOptions()
-                .placeholder(R.drawable.ic_launcher_background);
+        RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_launcher_background);
 
         Glide.with(this)
                 .setDefaultRequestOptions(requestOptions)
@@ -111,10 +118,11 @@ public class RecipeActivity extends BaseActivity {
         showProgressBar(false);
     }
 
-    private void setRecipeProperties(Recipe recipe){
-        if(recipe != null){
-            RequestOptions requestOptions = new RequestOptions()
-                    .placeholder(R.drawable.ic_launcher_background);
+    private void setRecipeProperties(Recipe recipe)
+    {
+        if(recipe != null)
+        {
+            RequestOptions requestOptions = new RequestOptions().placeholder(R.drawable.ic_launcher_background);
 
             Glide.with(this)
                     .setDefaultRequestOptions(requestOptions)
@@ -125,36 +133,21 @@ public class RecipeActivity extends BaseActivity {
             mRecipeRank.setText(String.valueOf(Math.round(recipe.getSocial_rank())));
 
             mRecipeIngredientsContainer.removeAllViews();
-            for(String ingredient: recipe.getIngredients()){
+            for(String ingredient: recipe.getIngredients())
+            {
                 TextView textView = new TextView(this);
                 textView.setText(ingredient);
                 textView.setTextSize(15);
-                textView.setLayoutParams(new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-                ));
+                textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 mRecipeIngredientsContainer.addView(textView);
             }
         }
-
         showParent();
         showProgressBar(false);
     }
 
-    private void showParent(){
+    private void showParent()
+    {
         mScrollView.setVisibility(View.VISIBLE);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

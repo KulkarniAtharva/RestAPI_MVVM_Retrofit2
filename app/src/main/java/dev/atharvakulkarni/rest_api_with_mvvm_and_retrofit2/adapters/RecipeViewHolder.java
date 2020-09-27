@@ -10,16 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import dev.atharvakulkarni.rest_api_with_mvvm_and_retrofit2.R;
 
-
-public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+{
     TextView title, publisher, socialScore;
     AppCompatImageView image;
     OnRecipeListener onRecipeListener;
 
-    public RecipeViewHolder(@NonNull View itemView, OnRecipeListener onRecipeListener) {
+    public RecipeViewHolder(@NonNull View itemView, OnRecipeListener onRecipeListener)
+    {
         super(itemView);
-
         this.onRecipeListener = onRecipeListener;
 
         title = itemView.findViewById(R.id.recipe_title);
@@ -31,12 +30,8 @@ public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.On
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         onRecipeListener.onRecipeClick(getAdapterPosition());
     }
 }
-
-
-
-
-

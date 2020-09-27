@@ -11,8 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
 
-public class HorizontalDottedProgress extends View {
-
+public class HorizontalDottedProgress extends View
+{
     //actual dot radius
     private int mDotRadius = 5;
 
@@ -25,21 +25,25 @@ public class HorizontalDottedProgress extends View {
     //specify how many dots you need in a progressbar
     private int mDotAmount = 10;
 
-    public HorizontalDottedProgress(Context context) {
+    public HorizontalDottedProgress(Context context)
+    {
         super(context);
     }
 
-    public HorizontalDottedProgress(Context context, AttributeSet attrs) {
+    public HorizontalDottedProgress(Context context, AttributeSet attrs)
+    {
         super(context, attrs);
     }
 
-    public HorizontalDottedProgress(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HorizontalDottedProgress(Context context, AttributeSet attrs, int defStyleAttr)
+    {
         super(context, attrs, defStyleAttr);
     }
 
     //Method to draw your customized dot on the canvas
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
 
         Paint paint = new Paint();
@@ -52,28 +56,28 @@ public class HorizontalDottedProgress extends View {
     }
 
     @Override
-    protected void onAttachedToWindow() {
+    protected void onAttachedToWindow()
+    {
         super.onAttachedToWindow();
         //Animation called when attaching to the window, i.e to your screen
         startAnimation();
     }
 
-    private void createDot(Canvas canvas, Paint paint) {
-
+    private void createDot(Canvas canvas, Paint paint)
+    {
         //here i have setted progress bar with 10 dots , so repeat and wnen i = mDotPosition  then increase the radius of dot i.e mBounceDotRadius
-        for(int i = 0; i < mDotAmount; i++ ){
-            if(i == mDotPosition){
+        for(int i = 0; i < mDotAmount; i++ )
+        {
+            if(i == mDotPosition)
                 canvas.drawCircle(10+(i*20), mBounceDotRadius, mBounceDotRadius, paint);
-            }else {
+            else
                 canvas.drawCircle(10+(i*20), mBounceDotRadius, mDotRadius, paint);
-            }
         }
-
-
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
+    {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width;
         int height;
@@ -84,35 +88,36 @@ public class HorizontalDottedProgress extends View {
         width = calculatedWidth;
         height = (mBounceDotRadius*2);
 
-
-
         //MUST CALL THIS
         setMeasuredDimension(width, height);
     }
 
-    private void startAnimation() {
+    private void startAnimation()
+    {
         BounceAnimation bounceAnimation = new BounceAnimation();
         bounceAnimation.setDuration(100);
         bounceAnimation.setRepeatCount(Animation.INFINITE);
         bounceAnimation.setInterpolator(new LinearInterpolator());
-        bounceAnimation.setAnimationListener(new Animation.AnimationListener() {
+        bounceAnimation.setAnimationListener(new Animation.AnimationListener()
+        {
             @Override
-            public void onAnimationStart(Animation animation) {
-
+            public void onAnimationStart(Animation animation)
+            {
             }
 
             @Override
-            public void onAnimationEnd(Animation animation) {
-
+            public void onAnimationEnd(Animation animation)
+            {
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
+            public void onAnimationRepeat(Animation animation)
+            {
                 mDotPosition++;
                 //when mDotPosition == mDotAmount , then start again applying animation from 0th positon , i.e  mDotPosition = 0;
-                if (mDotPosition == mDotAmount) {
+                if (mDotPosition == mDotAmount)
                     mDotPosition = 0;
-                }
+
                 Log.d("INFOMETHOD","----On Animation Repeat----");
 
             }
@@ -120,10 +125,11 @@ public class HorizontalDottedProgress extends View {
         startAnimation(bounceAnimation);
     }
 
-
-    private class BounceAnimation extends Animation {
+    private class BounceAnimation extends Animation
+    {
         @Override
-        protected void applyTransformation(float interpolatedTime, Transformation t) {
+        protected void applyTransformation(float interpolatedTime, Transformation t)
+        {
             super.applyTransformation(interpolatedTime, t);
             //call invalidate to redraw your view againg.
             invalidate();

@@ -1,7 +1,7 @@
 package dev.atharvakulkarni.rest_api_with_mvvm_and_retrofit2.util;
 
-public class Constants {
-
+public class Constants
+{
     //    public static final String BASE_URL = "https://www.food2fork.com";
     public static final String BASE_URL = "https://recipesapi.herokuapp.com";
 
