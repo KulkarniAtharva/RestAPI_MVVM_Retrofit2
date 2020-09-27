@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "Rest_API_with_MVVM_and_Retrofit2"
